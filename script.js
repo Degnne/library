@@ -26,14 +26,24 @@ function addBookToLibrary() {
 }
 
 function updateLibraryDisplay() {
+    clearLibraryDisplay();
     myLibrary.forEach(book => {
         addBookToDisplay(book);
+    });
+}
+
+function clearLibraryDisplay() {
+    let bookDisplays = document.querySelectorAll(".individual-book");
+    bookDisplays.forEach(bookDisplay => {
+        console.log(bookDisplay);
+        bookDisplay.remove();
     });
 }
 
 function addBookToDisplay(book) {
     let bookDisplay = document.createElement("div");
     bookDisplay.classList.add("book-display");
+    bookDisplay.classList.add("individual-book");
     let titleDisplay = document.createElement("div");
     titleDisplay.classList.add("title-display");
     titleDisplay.innerHTML = book.title;
@@ -50,5 +60,18 @@ function addBookToDisplay(book) {
     haveReadDisplay.classList.add("have-read-display");
     haveReadDisplay.innerHTML = book.haveRead;
     bookDisplay.appendChild(haveReadDisplay);
+    let deleteDisplay = document.createElement("div");
+    deleteDisplay.classList.add("delete-display");
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = "X";
+    deleteButton.addEventListener("click", () => deleteBook(myLibrary.indexOf(book)));
+    deleteDisplay.appendChild(deleteButton);
+    bookDisplay.appendChild(deleteDisplay);
     libraryDisplay.appendChild(bookDisplay);
+}
+
+function deleteBook(id) {
+    myLibrary.splice(id, 1);
+    updateLibraryDisplay();
 }
