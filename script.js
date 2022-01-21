@@ -5,6 +5,10 @@ function Book(title, author, pageCount, haveRead) {
     this.haveRead = haveRead;
 }
 
+Book.prototype.toggleHaveRead = function() {
+    this.haveRead = !this.haveRead;
+}
+
 let myLibrary = [];
 const libraryDisplay = document.querySelector("#library-display");
 
@@ -35,7 +39,6 @@ function updateLibraryDisplay() {
 function clearLibraryDisplay() {
     let bookDisplays = document.querySelectorAll(".individual-book");
     bookDisplays.forEach(bookDisplay => {
-        console.log(bookDisplay);
         bookDisplay.remove();
     });
 }
@@ -58,7 +61,18 @@ function addBookToDisplay(book) {
     bookDisplay.appendChild(pageCountDisplay);
     let haveReadDisplay = document.createElement("div");
     haveReadDisplay.classList.add("have-read-display");
-    haveReadDisplay.innerHTML = book.haveRead;
+    let haveReadButton = document.createElement("button");
+    haveReadButton.classList.add("have-read-button");
+    if(book.haveRead) {
+        haveReadButton.innerHTML = "Read";
+        haveReadButton.classList.add("read-button");
+    }
+    else {
+        haveReadButton.innerHTML = "Unread";
+        haveReadButton.classList.add("unread-button");
+    }
+    haveReadButton.addEventListener("click", () => { toggleHaveRead(book)});
+    haveReadDisplay.appendChild(haveReadButton);
     bookDisplay.appendChild(haveReadDisplay);
     let deleteDisplay = document.createElement("div");
     deleteDisplay.classList.add("delete-display");
@@ -69,6 +83,11 @@ function addBookToDisplay(book) {
     deleteDisplay.appendChild(deleteButton);
     bookDisplay.appendChild(deleteDisplay);
     libraryDisplay.appendChild(bookDisplay);
+}
+
+function toggleHaveRead(book) {
+    book.toggleHaveRead();
+    updateLibraryDisplay();
 }
 
 function deleteBook(id) {
