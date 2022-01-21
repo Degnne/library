@@ -1,0 +1,63 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#menu {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#header {
+    font-size: 24px;
+}
+
+#content {
+    flex-grow: 1;
+    background-color: gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#library-display {
+    width: 800px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.book-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.title-display {
+    width: 200px;
+    text-align: left;
+}
+
+.author-display {
+    width: 200px;
+    text-align: left;
+}
+
+.page-count-display {
+    width: 100px;
+    text-align: left;
+}
+
+.have-read-display {
+    width: 50px;
+    text-align: right;
+}
